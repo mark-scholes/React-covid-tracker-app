@@ -11,6 +11,8 @@ import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import CasesByCountry from "./components/CasesByCountry";
 import WorldwideNewCases from "./components/WorldwideNewCases";
+import Graph from "./components/Graph";
+import { sortData } from "./util";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -18,6 +20,7 @@ const App = () => {
   const [cases, setCases] = useState(0);
   const [total, setTotal] = useState(0);
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -29,6 +32,9 @@ const App = () => {
             value: country.countryInfo.iso2,
           }));
 
+          const sortedData = sortData(data);
+          console.log(sortedData);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -101,9 +107,12 @@ const App = () => {
       </div>
       <Card className="app__right">
         <CardContent>
-          <CasesByCountry />
+          <h3>Live Cases by Country</h3>
+          <CasesByCountry countries={tableData} />
+          <h3>WorldWide new Cases</h3>
           <WorldwideNewCases />
         </CardContent>
+        <Graph />
       </Card>
     </div>
   );

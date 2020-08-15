@@ -13,6 +13,7 @@ import CasesByCountry from "./components/CasesByCountry";
 import WorldwideNewCases from "./components/WorldwideNewCases";
 import Graph from "./components/Graph";
 import { sortData } from "./util";
+import "leaflet/dist/leaflet.css";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -21,6 +22,8 @@ const App = () => {
   const [total, setTotal] = useState(0);
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [center, setCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [zoom, setZoom] = useState(4);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -33,7 +36,6 @@ const App = () => {
           }));
 
           const sortedData = sortData(data);
-          console.log(sortedData);
           setTableData(sortedData);
           setCountries(countries);
         });
@@ -66,10 +68,12 @@ const App = () => {
       .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
+
+        setCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setZoom(4);
       });
   };
 
-  console.log(countryInfo);
   return (
     <div className="app">
       <div className="app__left">
@@ -103,7 +107,7 @@ const App = () => {
           />
         </div>
 
-        <Map />
+        <Map center={center} zoom={zoom} />
       </div>
       <Card className="app__right">
         <CardContent>

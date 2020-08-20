@@ -137,3 +137,8 @@ const App = () => {
 };
 
 export default App;
+
+// firebase init
+//select the correct one from the list
+// build
+//npm run build

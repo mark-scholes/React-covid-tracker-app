@@ -24,6 +24,8 @@ const App = () => {
   const [tableData, setTableData] = useState([]);
   const [center, setCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [zoom, setZoom] = useState(4);
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -38,6 +40,7 @@ const App = () => {
           const sortedData = sortData(data);
           setTableData(sortedData);
           setCountries(countries);
+          setMapCountries(data);
         });
     };
 
@@ -107,13 +110,17 @@ const App = () => {
           />
         </div>
 
-        <Map center={center} zoom={zoom} />
+        <Map
+          center={center}
+          zoom={zoom}
+          countries={mapCountries}
+          casesType={casesType}
+        />
       </div>
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
           <CasesByCountry countries={tableData} />
-          <h3>WorldWide new Cases</h3>
           <WorldwideNewCases />
         </CardContent>
         <Graph />

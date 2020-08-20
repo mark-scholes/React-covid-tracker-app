@@ -80,7 +80,6 @@ const Graph = ({ casesType = "cases" }) => {
 
   return (
     <div>
-      <h1>Monkey</h1>
       {data?.length > 0 && (
         <Line
           options={options}

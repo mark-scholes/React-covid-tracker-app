@@ -62,7 +62,7 @@ const buildChartData = (data, casesType) => {
   return chartData;
 };
 
-const Graph = ({ casesType = "cases" }) => {
+const Graph = ({ casesType }) => {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Graph = ({ casesType = "cases" }) => {
       await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
         .then((response) => response.json())
         .then((data) => {
-          let chartData = buildChartData(data, "cases");
+          let chartData = buildChartData(data, casesType);
           setData(chartData);
         });
     };
@@ -87,8 +87,11 @@ const Graph = ({ casesType = "cases" }) => {
             datasets: [
               {
                 data: data,
-                backgroundColor: "rgba(204,16,52,0.5",
-                borderColor: "#CC1034",
+                backgroundColor:
+                  casesType === "recovered"
+                    ? "rgba(125, 215, 29, 0.5)"
+                    : "rgba(204,16,52,0.5",
+                borderColor: casesType === "recovered" ? "#7dd71d" : "#CC1034",
               },
             ],
           }}

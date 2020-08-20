@@ -10,9 +10,8 @@ import {
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import CasesByCountry from "./components/CasesByCountry";
-import WorldwideNewCases from "./components/WorldwideNewCases";
 import Graph from "./components/Graph";
-import { sortData } from "./util";
+import { sortData, statFormat } from "./util";
 import "leaflet/dist/leaflet.css";
 
 const App = () => {
@@ -94,19 +93,25 @@ const App = () => {
 
         <div className="app__stats">
           <InfoBox
+            onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={statFormat(countryInfo.todayCases)}
+            total={statFormat(countryInfo.cases)}
+            active={casesType === "cases"}
           />
           <InfoBox
+            onClick={(e) => setCasesType("recovered")}
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={statFormat(countryInfo.todayRecovered)}
+            total={statFormat(countryInfo.recovered)}
+            active={casesType === "recovered"}
           />
           <InfoBox
+            onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={statFormat(countryInfo.todayDeaths)}
+            total={statFormat(countryInfo.deaths)}
+            active={casesType === "deaths"}
           />
         </div>
 
@@ -121,9 +126,11 @@ const App = () => {
         <CardContent>
           <h3>Live Cases by Country</h3>
           <CasesByCountry countries={tableData} />
-          <WorldwideNewCases />
         </CardContent>
-        <Graph />
+        <CardContent>
+          <h3>Worldwide {casesType}</h3>
+          <Graph casesType={casesType} />
+        </CardContent>
       </Card>
     </div>
   );

@@ -1,26 +1,55 @@
 .infoBox {
-  flex: 1;
+  display: flex;
+  flex: auto;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  text-align: center;
 }
 
 .infoBox:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 1.7vw;
 }
 
 .infoBox__cases {
   color: #cc1034;
   font-weight: 600;
-  font-size: 1.75rem;
+  font-size: 2.3vw;
   margin-bottom: 0.5rem;
 }
 
 .infoBox__total {
   color: #6c757d;
-  font-weight: 700 !important;
-  font-size: 0.8rem !important;
-  margin-top: 15px !important;
+  font-weight: 700;
+  font-size: 1.2vw;
 }
 
 .infoBox--selected {
   border-bottom: 10px solid #3ea6ff;
+}
+
+.infoBox__title {
+  font-size: 1.5vw;
+}
+
+@media (max-width: 990px) {
+  .infoBox {
+    margin-bottom: 0 !important;
+  }
+
+  .infoBox__title {
+    font-size: 3.5vw;
+    margin: 0;
+  }
+
+  .infoBox__cases {
+    font-size: 4vw;
+    margin: 0;
+  }
+
+  .infoBox__total {
+    font-size: 3vw;
+    margin-top: 1.5vh;
+  }
 }

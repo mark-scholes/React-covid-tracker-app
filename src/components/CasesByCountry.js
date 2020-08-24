@@ -5,14 +5,18 @@ import numeral from "numeral";
 const CasesByCountry = ({ countries }) => {
   return (
     <div className="CasesByCountry__table">
-      {countries.map(({ country, cases }) => (
-        <tr>
-          <td>{country}</td>
-          <td>
-            <strong>{numeral(cases).format("0,0")}</strong>
-          </td>
-        </tr>
-      ))}
+      <table>
+        <tbody>
+          {countries.map(({ country, cases }) => (
+            <tr key={country}>
+              <td>{country}</td>
+              <td>
+                <strong>{numeral(cases).format("0,0")}</strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

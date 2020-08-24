@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 body {
@@ -8,18 +9,25 @@ body {
 .app {
   display: flex;
   justify-content: space-evenly;
-  padding: 20px;
+  padding: 3.5vw;
+  height: 100%;
 }
 .app__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  font-size: 2.5vw;
+}
+.MuiSelect-select {
+  min-width: 6vw !important;
+  font-size: 1.2vw !important;
 }
 
 .app__stats {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 4vh;
 }
 .app__left {
   flex: 0.9;
@@ -28,12 +36,16 @@ body {
 .app__right {
   display: flex;
   flex-direction: column;
+  width: 30vw;
 }
 
 .app__right .MuiCardContent-root {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+.app__right h3 {
+  font-size: 1.5vw;
 }
 
 .app__dropdown {
@@ -43,5 +55,30 @@ body {
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
+  }
+
+  .app__right {
+    width: 100%;
+  }
+
+  .MuiCardContent-root {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5vw !important;
+  }
+
+  .map {
+    margin-bottom: 20px;
+  }
+
+  .graph {
+    height: 45vh;
+    margin-top: 2vh;
+  }
+
+  .MuiSelect-select {
+    min-width: 8vw !important;
+    font-size: 3.5vw !important;
   }
 }

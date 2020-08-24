@@ -17,26 +17,28 @@ import "leaflet/dist/leaflet.css";
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
-  const [cases, setCases] = useState(0);
-  const [total, setTotal] = useState(0);
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
   const [center, setCenter] = useState({ lat: 34.80746, lng: -40.4796 });
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
+    //inital app load fetch.
+    //gets all of the data from disease.sh
     const getCountriesData = async () => {
       fetch("https://disease.sh/v3/covid-19/countries")
         .then((response) => response.json())
         .then((data) => {
           const countries = data.map((country) => ({
+            // break down the data to be an object with just the name and countrycode
             name: country.country,
             value: country.countryInfo.iso2,
           }));
 
           const sortedData = sortData(data);
+          //sorted data is contained in the utils file all it does is sort the data by number of cases in decending order
           setTableData(sortedData);
           setCountries(countries);
           setMapCountries(data);
@@ -85,7 +87,9 @@ const App = () => {
             <Select variant="outlined" value={country} onChange={changeCountry}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem key={country.name} value={country.value}>
+                  {country.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -142,3 +146,4 @@ export default App;
 //select the correct one from the list
 // build
 //npm run build
+//firebase deploy

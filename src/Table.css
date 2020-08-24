@@ -1,7 +1,7 @@
 .CasesByCountry__table {
   margin-top: 20px;
   overflow: scroll;
-  height: 400px;
+  height: 50vh;
   color: #6a5d5d;
   background-color: #fff;
 }
@@ -17,4 +17,20 @@
 
 .CasesByCountry__table tr:nth-of-type(odd) {
   background-color: #f3f2f8;
+}
+
+.CasesByCountry__table table {
+  width: 100%;
+}
+.CasesByCountry__table table tr {
+  font-size: 1vw;
+}
+
+@media (max-width: 990px) {
+  .CasesByCountry__table table tr {
+    font-size: 3.5vw;
+  }
+  .CasesByCountry__table {
+    height: 40vh;
+  }
 }

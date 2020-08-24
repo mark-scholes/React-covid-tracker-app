@@ -41,6 +41,7 @@ export const statFormat = (stat) =>
 export const showDataOnMap = (data, casesType = "cases") =>
   data.map((country) => (
     <Circle
+      key={country.country}
       center={[country.countryInfo.lat, country.countryInfo.long]}
       fillOpacity={0.4}
       color={casesTypeColors[casesType].hex}
